@@ -4,9 +4,14 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 ## 1. What was broken when you started?
 
-- What did the game look like the first time you ran it?
-- List at least two concrete bugs you noticed at the start  
-  (for example: "the secret number kept changing" or "the hints were backwards").
+**Bug #1: Hints Are Backwards on Every Other Guess**
+When you make your 2nd, 4th, 6th, or 8th guess, the game tells you the opposite direction to go. For example, if the secret number is 50 and you guess 6, the game says "Go HIGHER!" when you should actually go lower. This makes it nearly impossible to play correctly after your first guess because the hints are completely wrong. The game is giving you bad directions instead of helping with the hints.
+
+**Bug #2: "Hard" Mode is Easier Than "Normal" Mode**
+The "Hard" difficulty setting makes you guess a number between 1-50 with 5 attempts allowed. The "Normal" difficulty makes you guess between 1-100 with 8 attempts allowed. This is wrong! Hard mode should be harder, not easier. A smaller number range with fewer attempts should not be the "hard" option, it's actually the easiest. Players expect "Hard" to be more challenging, but it's the opposite.
+
+**Bug #3: Winning Fast Actually Gives You Fewer Points**
+If you guess the correct number on your first try, you only get 80 points. If you win on your second try, you get 70 points. If you win on your third try, you get 60 points. This is broken logic, you're being punished for winning quickly and in fewer attempts instead of rewarded! Players expect to get more points for winning faster, not fewer points.
 
 ---
 
