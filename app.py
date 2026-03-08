@@ -21,7 +21,7 @@ difficulty = st.sidebar.selectbox(
 )
 
 attempt_limit_map = {
-    "Easy": 6,
+    "Easy": 10,
     "Normal": 8,
     "Hard": 5,
 }
@@ -35,8 +35,9 @@ st.sidebar.caption(f"Attempts allowed: {attempt_limit}")
 if "secret" not in st.session_state:
     st.session_state.secret = random.randint(low, high)
 
+#FIX: Initialize attempts to 0 (previously was 1) - Copilot helped and debugged the scoring error
 if "attempts" not in st.session_state:
-    st.session_state.attempts = 1
+    st.session_state.attempts = 0
 
 if "score" not in st.session_state:
     st.session_state.score = 0
@@ -46,6 +47,10 @@ if "status" not in st.session_state:
 
 if "history" not in st.session_state:
     st.session_state.history = []
+
+#FIX: Added game_counter to reset input field on New Game (Copilot helped in identifying Streamlit caching issue)
+if "game_counter" not in st.session_state:
+    st.session_state.game_counter = 0
 
 st.subheader("Make a guess")
 
@@ -61,9 +66,10 @@ with st.expander("Developer Debug Info"):
     st.write("Difficulty:", difficulty)
     st.write("History:", st.session_state.history)
 
+#FIX: Dynamic key with game_counter clears cached input on New Game (Copilot helped in tracing Streamlit widget issue)
 raw_guess = st.text_input(
     "Enter your guess:",
-    key=f"guess_input_{difficulty}"
+    key=f"guess_input_{difficulty}_{st.session_state.game_counter}"
 )
 
 col1, col2, col3 = st.columns(3)
@@ -74,9 +80,13 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
+#FIX: New Game now fully resets all the states (status, history, input)
 if new_game:
     st.session_state.attempts = 0
-    st.session_state.secret = random.randint(1, 100)
+    st.session_state.secret = random.randint(low, high)
+    st.session_state.status = "playing"
+    st.session_state.history = []
+    st.session_state.game_counter += 1
     st.success("New game started.")
     st.rerun()
 

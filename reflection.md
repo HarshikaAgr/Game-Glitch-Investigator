@@ -17,18 +17,32 @@ If you guess the correct number on your first try, you only get 80 points. If yo
 
 ## 2. How did you use AI as a teammate?
 
-- Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
-- Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
-- Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
+**AI Tool Used:** GitHub Copilot (Agent mode in VS Code)
+
+**Correct Suggestion:**
+Copilot suggested using a `game_counter` that increments every time you click "New Game". This counter gets added to the text input field's key, which forces Streamlit to create a completely new input widget instead of reusing the old one. I verified this was correct by clicking "New Game" and seeing the input box completely empty instead of showing the old guess. This fixed the state-caching bug.
+
+**Incorrect/Misleading Suggestion:**
+Copilot initially told me the hints were working correctly in the code, but when I tested the game, I found they were backwards on certain difficulty levels. The hints looked correct in the code (Go LOWER when guess > secret), but the suggestion missed that the real issue was sometimes the hints seemed inconsistent. I verified by playing multiple games and checking the debug panel to see what the secret number was compared to my guess.
 
 ---
 
 ## 3. Debugging and testing your fixes
 
-- How did you decide whether a bug was really fixed?
-- Describe at least one test you ran (manual or using pytest)  
-  and what it showed you about your code.
-- Did AI help you design or understand any tests? How?
+**How I knew bugs were fixed:**
+I tested each bug manually by playing the game in my browser. For each fix, I would click "New Game" and then try different guesses to see if the behavior changed.
+
+**Test 1 - Hints Bug:**
+I guessed a number, checked the debug info to see what the secret was, then tested if the hint told me the correct direction. Before the fix, the hints were backwards. After the fix, the hints always matched the correct direction (if I'm too high, it said "Go LOWER").
+
+**Test 2 - Scoring Bug:**
+I played a full game and won in 5 attempts. I checked the final score shown on the screen and compared it to what it should be (started at 0, lost 5 points twice for wrong guesses, then gained 50 points for winning on attempt 5 = 40 points). Before the fix, the score showed 30. After the fix, it showed 40. This proved the attempts counter was correct now.
+
+**Test 3 - New Game Reset:**
+I clicked "New Game" and checked if the input box was empty and the score reset to 0. Before the fix, the old guess was still in the input box. After the fix, everything was blank and ready for a new game.
+
+**AI Help with Testing:**
+Copilot helped me understand what to look for by explaining that I should check the debug info panel and compare the secret number with my guess. It also helped me calculate what the correct score should be.
 
 ---
 
