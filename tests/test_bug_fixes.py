@@ -19,14 +19,14 @@ def test_bug1_guess_too_high_correct_hint():
     """When guess > secret, hint should be 'Too High' (regardless of attempt number)"""
     outcome, message = check_guess(60, 50)
     assert outcome == "Too High"
-    assert "HIGHER" in message
+    assert "LOWER" in message  # FIX: When guess is too high, we should go LOWER
 
 
 def test_bug1_guess_too_low_correct_hint():
     """When guess < secret, hint should be 'Too Low' (regardless of attempt number)"""
     outcome, message = check_guess(40, 50)
     assert outcome == "Too Low"
-    assert "LOWER" in message
+    assert "HIGHER" in message  # FIX: When guess is too low, we should go HIGHER
 
 
 def test_bug1_small_guess_vs_large_secret():

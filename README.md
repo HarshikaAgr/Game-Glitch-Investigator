@@ -25,13 +25,29 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+**Game Purpose:**
+This is a number guessing game where players try to guess a secret number within a range based on their difficulty level. The game gives hints (go higher/lower) and awards points based on how quickly you win. It teaches players about Streamlit state management and debugging AI-generated code.
+
+**Bugs Found:**
+1. **Backwards Hints** - The game was telling players to "Go Higher" when they should go lower (and vice versa). This made hints useless.
+2. **Broken Scoring** - Winning quickly gave fewer points instead of more points. The scoring reward system was backwards.
+3. **State Reset Issue** - When you clicked "New Game", the input box still showed the old guess, and the game state wasn't fully resetting.
+4. **Unfair Bonus System** - Wrong guesses had an inconsistent penalty system with confusing even/odd bonuses.
+
+**Fixes Applied:**
+1. Fixed hint messages in `check_guess()` - swapped "Go HIGHER" and "Go LOWER" logic so they match the correct direction.
+2. Fixed scoring initialization - changed attempts from starting at 1 to 0, corrected the win formula to properly reward speed.
+3. Added `game_counter` to reset the input field key on each new game, forcing Streamlit to clear cached widgets.
+4. Removed even/odd bonus inconsistency - now all wrong guesses give a consistent -5 penalty.
+5. Added proper state reset in the "New Game" button to clear history, status, and attempts.
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+**Fixed Game - Winning Screenshot:**
+![Game Demo](game_demo.png)
+
+**Pytest Results - All Tests Passing:**
+![Pytest Results](pytest_results.png)
 
 ## 🚀 Stretch Features
 
