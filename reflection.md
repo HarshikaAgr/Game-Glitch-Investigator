@@ -47,16 +47,20 @@ Copilot helped me understand what to look for by explaining that I should check 
 ---
 
 ## 4. What did you learn about Streamlit and state?
+Streamlit reruns the whole script every time you click something. Without session_state, `random.randint()` runs again and creates a new secret number each time.
 
-- In your own words, explain why the secret number kept changing in the original app.
-- How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
-- What change did you make that finally gave the game a stable secret number?
+**Streamlit reruns and session state explained:**
+Imagine Streamlit reads a recipe from top to bottom every time you interact with the app and the Session state is like a sticky note that remembers all the important things between the reads. If you save the secret to this sticky note, it stays the same even after reruns.
 
 ---
 
 ## 5. Looking ahead: your developer habits
 
-- What is one habit or strategy from this project that you want to reuse in future labs or projects?
-  - This could be a testing habit, a prompting strategy, or a way you used Git.
-- What is one thing you would do differently next time you work with AI on a coding task?
-- In one or two sentences, describe how this project changed the way you think about AI generated code.
+**Habit to reuse:**
+Always add a debug info panel during development. Seeing the actual values (secret, score, attempts) made debugging so much faster than guessing.
+
+**What I'd do differently with AI next time:**
+Don't trust the AI code is correct just because it looks right. Always test it myself manually to see if it actually solves the problem.
+
+**How this changed my thinking about AI code:**
+AI-generated code is a starting point, not the final answer. It needs careful testing and human verification to catch hidden bugs.
